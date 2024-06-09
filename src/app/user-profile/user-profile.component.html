@@ -1,0 +1,37 @@
+<mat-card class="user-profile-card">
+  <mat-card-header>
+    <mat-card-title>User Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="user.Username" placeholder="Username" name="Username" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="user.Password" placeholder="Password" name="Password" required type="password">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.Email" placeholder="Email" type="email" name="Email" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Birthday</mat-label>
+        <input matInput [(ngModel)]="user.Birthday" placeholder="Birthday" type="date" name="Birthday">
+      </mat-form-field>
+      <div class="button-group">
+        <button mat-raised-button color="primary" (click)="editProfile()">Edit Profile</button>
+        <button mat-raised-button color="warn" (click)="deleteUser()">Delete Account</button>
+      </div>
+    </form>
+    <h2>Favorite Movies</h2>
+    <div class="favorite-movies-container">
+      <mat-card *ngFor="let movie of favoriteMovies" class="favorite-movie-card">
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <img mat-card-image [src]="movie.ImagePath" [alt]="movie.Title" />
+        <button mat-raised-button color="warn" (click)="removeFavorite(movie._id)">Remove</button>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>
