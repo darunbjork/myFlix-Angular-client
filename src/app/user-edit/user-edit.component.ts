@@ -3,24 +3,50 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+/**
+ * @description
+ * Component to handle user profile editing.
+ * Allows users to view and update their profile information or delete their account.
+ * 
+ * @component
+ * @example
+ * <app-user-edit></app-user-edit>
+ */
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
+  /**
+   * Object to store user data.
+   * @type {any}
+   */
   user: any = {};
 
+  /**
+   * Constructor that injects required services.
+   * @param {FetchApiDataService} fetchApiData - Service to fetch data from API.
+   * @param {MatSnackBar} snackBar - Service to show snack bar notifications.
+   * @param {Router} router - The router for navigation.
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
+  /**
+   * Initializes the component.
+   * Fetches user data.
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * Fetches the user's data from the API.
+   */
   getUser(): void {
     const storedUser = localStorage.getItem('user');
     const username = storedUser ? JSON.parse(storedUser).Username : null;
@@ -36,6 +62,10 @@ export class UserEditComponent implements OnInit {
       );
     }
   }
+
+  /**
+   * Updates the user's data.
+   */
   updateUser(): void {
     this.fetchApiData.editUser(this.user).subscribe(
       (resp: any) => {
@@ -49,8 +79,10 @@ export class UserEditComponent implements OnInit {
       }
     );
   }
-  
 
+  /**
+   * Deletes the user's account.
+   */
   deleteUser(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       const storedUser = localStorage.getItem('user');

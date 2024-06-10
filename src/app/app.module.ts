@@ -1,4 +1,3 @@
-// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +27,6 @@ import { MovieDialogComponent } from './movie-dialog/movie-dialog.component';
 import { SynopsisDialogComponent } from './synopsis-dialog/synopsis-dialog.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-
 const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
@@ -37,6 +35,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
+/**
+ * @description
+ * The main module of the application.
+ * Declares and imports all necessary components and modules for the application.
+ * 
+ * @NgModule
+ */
 @NgModule({
   declarations: [
     AppComponent,
