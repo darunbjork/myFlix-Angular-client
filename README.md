@@ -1,4 +1,4 @@
-Click on the https://cinemahub22.netlify.app/welcome
+Click on the https://cinemahub22.netlify.app
 
 # MyFlixAngularClient
 
