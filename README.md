@@ -1,5 +1,7 @@
 # 🎬 myFlix-Angular-client
 
+https://cinemahub22.netlify.app/welcome
+
 Hi there! 👋  
 This is the **Angular frontend** for my movie database project, `myFlix`. It's a single-page application (SPA) that allows users to browse a collection of movies, manage their favourites, and update their profile — all connected to a custom-built REST API I developed.
 
