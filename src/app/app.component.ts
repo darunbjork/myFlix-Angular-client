@@ -1,5 +1,8 @@
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from './auth.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 /**
  * @description
@@ -14,6 +17,8 @@ import { AuthService } from './auth.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, NavbarComponent], // Will add common modules here later
 })
 export class AppComponent implements OnInit {
   private authService = inject(AuthService);

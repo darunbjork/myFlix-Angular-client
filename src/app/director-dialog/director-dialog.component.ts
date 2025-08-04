@@ -1,5 +1,9 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 /**
  * @description
@@ -13,7 +17,15 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-director-dialog',
   templateUrl: './director-dialog.component.html',
-  styleUrls: ['./director-dialog.component.scss']
+  styleUrls: ['./director-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+  ],
 })
 export class DirectorDialogComponent {
   data = inject<{
