@@ -1,0 +1,17 @@
+<div class="director-container">
+  <mat-toolbar>
+    <mat-toolbar-row class="director-header">
+      <h3 mat-dialog-title class="director-title">
+        {{ data.name }}
+      </h3>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-dialog-content class="director-content">
+    <p><strong>Biography:</strong> {{ data.bio }}</p>
+    <p><strong>Birth:</strong> {{ data.birth }}</p>
+    <p *ngIf="data.death"><strong>Death:</strong> {{ data.death }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>
