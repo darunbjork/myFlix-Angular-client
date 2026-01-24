@@ -1,9 +1,15 @@
-import { Component, OnInit, Input, inject } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, inject } from '@angular/core';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 /**
  * @description
@@ -18,8 +24,20 @@ import { AuthService } from '../auth.service';
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
   styleUrls: ['./user-login-form.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    RouterModule,
+  ],
 })
-export class UserLoginFormComponent implements OnInit {
+export class UserLoginFormComponent {
   fetchApiData = inject(FetchApiDataService);
   dialogRef = inject<MatDialogRef<UserLoginFormComponent>>(MatDialogRef);
   snackBar = inject(MatSnackBar);

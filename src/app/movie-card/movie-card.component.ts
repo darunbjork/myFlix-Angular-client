@@ -1,10 +1,15 @@
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { Component, OnInit, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FetchApiDataService, Movie } from '../fetch-api-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 /**
  * @description
@@ -18,7 +23,17 @@ import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.comp
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+  styleUrls: ['./movie-card.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+  ],
 })
 export class MovieCardComponent implements OnInit {
   private fetchApiData = inject(FetchApiDataService);
@@ -122,7 +137,7 @@ export class MovieCardComponent implements OnInit {
    * Opens a dialog to display director details.
    * @param {any} director - The director data.
    */
-  openDirectorDialog(director: { Name: string; Bio: string; Birth: Date; Death: Date }): void {
+  openDirectorDialog(director: { Name: string; Bio: string; Birth: string; Death: string | null }): void {
     this.dialog.open(DirectorDialogComponent, {
       data: { name: director.Name, bio: director.Bio, birth: director.Birth, death: director.Death }
     });

@@ -1,7 +1,13 @@
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Component, OnInit, inject } from '@angular/core';
 import { FetchApiDataService, User } from '../fetch-api-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 /**
  * @description
@@ -16,6 +22,16 @@ import { Router } from '@angular/router';
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
 export class UserEditComponent implements OnInit {
   private fetchApiData = inject(FetchApiDataService);
@@ -46,7 +62,7 @@ export class UserEditComponent implements OnInit {
       this.fetchApiData.getUser(username).subscribe(
         (resp: User) => {
           this.user = resp;
-          this.user.Birthday = new Date(this.user.Birthday).toISOString().substring(0, 10);
+          this.user.Birthday = this.user.Birthday.substring(0, 10);
         },
         (error) => {
           this.snackBar.open(`Error fetching user data: ${error.message}`, 'OK', { duration: 2000 });

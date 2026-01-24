@@ -1,7 +1,15 @@
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { Component, OnInit, inject } from '@angular/core';
 import { FetchApiDataService, User, Movie } from '../fetch-api-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 /**
  * @description
@@ -16,6 +24,18 @@ import { Router } from '@angular/router';
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+  ],
 })
 export class UserProfileComponent implements OnInit {
   private fetchApiData = inject(FetchApiDataService);
@@ -53,7 +73,7 @@ export class UserProfileComponent implements OnInit {
       this.fetchApiData.getUser(username).subscribe(
         (resp: User) => {
           this.user = resp;
-          this.user.Birthday = new Date(this.user.Birthday).toISOString().substring(0, 10);
+          this.user.Birthday = this.user.Birthday.substring(0, 10);
         },
         (error) => {
           this.snackBar.open(`Error fetching user data: ${error.message}`, 'OK', { duration: 2000 });

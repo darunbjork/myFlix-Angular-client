@@ -5,15 +5,23 @@ import { catchError, map } from 'rxjs/operators';
 
 const apiUrl = 'https://myflix-movie-app-3823c24113de.herokuapp.com/';
 
-interface User {
+export interface UserRegistrationData {
+  Username: string;
+  Password: string;
+  Email: string;
+  Birthday: string;
+}
+
+export interface User {
   _id: string;
   Username: string;
   Email: string;
-  Birthday: Date;
+  Birthday: string;
   FavoriteMovies: string[]; // Array of movie IDs
+  Password?: string; // Make password optional for user updates
 }
 
-interface Movie {
+export interface Movie {
   _id: string;
   Title: string;
   Description: string;
@@ -24,8 +32,8 @@ interface Movie {
   Director: {
     Name: string;
     Bio: string;
-    Birthday: Date;
-    Deathday: Date;
+    Birth: string;
+    Death: string | null;
   };
   ImagePath: string;
   Featured: boolean;
@@ -73,7 +81,7 @@ export class FetchApiDataService {
    * @param {any} userDetails - The user details.
    * @returns {Observable<any>} The response from the API.
    */
-  public userRegistration(userDetails: User): Observable<User> {
+  public userRegistration(userDetails: UserRegistrationData): Observable<User> {
     return this.http.post<User>(apiUrl + 'users', userDetails).pipe(catchError(this.handleError));
   }
 
@@ -117,7 +125,7 @@ export class FetchApiDataService {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -223,16 +231,7 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  /**
-   * Extracts response data.
-   * @private
-   * @param {Response} res - The response.
-   * @returns {T} The extracted data.
-   */
-  private extractResponseData<T>(res: Response): T {
-    const body = res;
-    return (body || {}) as T;
-  }
+  
 
   /**
    * Handles HTTP errors.
